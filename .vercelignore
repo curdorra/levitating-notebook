@@ -1,0 +1,6 @@
+# Never upload the local embedded database (it holds your dev accounts), env files or build output.
+.pglite
+.env*
+!.env.example
+.next
+node_modules
