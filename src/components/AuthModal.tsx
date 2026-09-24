@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ForgotForm, LoginForm, SignupForm } from "./AuthForms";
 import { ThemePicker } from "./ThemePicker";
+import { SUPPORT_URL } from "@/lib/links";
 import { Brackets } from "./SpecimenDeco";
 
 export type AuthView = "login" | "signup" | "forgot";
@@ -58,6 +59,9 @@ export function AuthModal() {
         <p className="legal-links">
           <Link href="/privacy">Privacy</Link>
           <Link href="/terms">Terms</Link>
+          <a href={SUPPORT_URL} target="_blank" rel="noopener noreferrer">
+            Support
+          </a>
         </p>
       </div>
     </div>

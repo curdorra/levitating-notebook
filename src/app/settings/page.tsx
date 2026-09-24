@@ -2,6 +2,7 @@ import Link from "next/link";
 import { requireUser } from "@/lib/session";
 import { TopBar } from "@/components/TopBar";
 import { ThemePicker } from "@/components/ThemePicker";
+import { SUPPORT_URL } from "@/lib/links";
 import {
   DeleteAccountForm,
   EmailForm,
@@ -54,6 +55,19 @@ export default async function SettingsPage() {
         </section>
 
         <section className="card settings-card">
+          <h2 className="section-title">Support</h2>
+          <p className="form-muted">
+            Levitating Notebook is free and has no ads. If it&apos;s a good home for your writing, you can help keep it
+            running.
+          </p>
+          <div>
+            <a href={SUPPORT_URL} target="_blank" rel="noopener noreferrer" className="btn btn-ghost btn-small">
+              Support on Ko-fi ↗
+            </a>
+          </div>
+        </section>
+
+        <section className="card settings-card">
           <h2 className="section-title">Delete account</h2>
           <DeleteAccountForm account={account} />
         </section>
@@ -61,6 +75,9 @@ export default async function SettingsPage() {
         <p className="legal-links">
           <Link href="/privacy">Privacy policy</Link>
           <Link href="/terms">Terms of service</Link>
+          <a href={SUPPORT_URL} target="_blank" rel="noopener noreferrer">
+            Support
+          </a>
         </p>
       </main>
     </>

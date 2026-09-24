@@ -20,6 +20,25 @@ html {
   }
 }
 
+/* Lenis (SmoothScroll.tsx) eases wheel scrolling itself, so the browser's
+   smoothing must stay off while it runs or the two fight. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+html.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
 /* Theme changes crossfade (ThemePicker uses a view transition). */
 ::view-transition-old(root),
 ::view-transition-new(root) {

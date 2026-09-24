@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { getCurrentUser } from "@/lib/session";
 import { Ambience } from "@/components/Ambience";
-import { ScrollCalm } from "@/components/ScrollCalm";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import { resolveTheme } from "@/lib/themes";
 import { VaultProvider } from "@/components/Vault";
 import { fontVariables } from "./fonts";
@@ -26,7 +26,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en" data-theme={resolveTheme(user?.theme)} className={fontVariables} data-scroll-behavior="smooth">
       <body>
         <Ambience />
-        <ScrollCalm />
+        <SmoothScroll />
         <div className="app">
           {user ? (
             <VaultProvider username={user.username} encVersion={user.encVersion} wrappedKey={user.wrappedKey}>
