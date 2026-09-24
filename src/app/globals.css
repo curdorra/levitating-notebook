@@ -12,6 +12,21 @@ html {
   color-scheme: light;
 }
 
+/* In-page scrolling glides; Next.js still jumps instantly on navigation
+   because <html> carries data-scroll-behavior="smooth". */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Theme changes crossfade (ThemePicker uses a view transition). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 body {
   margin: 0;
   min-height: 100dvh;
@@ -86,6 +101,11 @@ textarea,
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
+}
+
+/* Hold the scenery still while scrolling so every frame goes to the scroll. */
+[data-scrolling] .ambience * {
+  animation-play-state: paused !important;
 }
 
 .amb {
@@ -1012,6 +1032,7 @@ textarea,
   height: calc(100dvh - 61px);
   padding: 24px 16px;
   overflow-y: auto;
+  overscroll-behavior: contain;
   border-right: 1px solid var(--line);
   background: var(--sidebar-bg);
   -webkit-backdrop-filter: var(--surface-blur);

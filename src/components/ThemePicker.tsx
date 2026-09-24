@@ -18,12 +18,20 @@ function subscribe(onChange: () => void) {
 }
 const readTheme = () => (document.documentElement.dataset.theme as Theme) ?? "linen";
 const applyTheme = (theme: Theme) => {
-  document.documentElement.dataset.theme = theme;
+  const root = document.documentElement;
+  if (root.dataset.theme === theme) return;
+  const swap = () => {
+    root.dataset.theme = theme;
+  };
+  // Crossfade the whole page between themes where the browser supports it;
+  // elsewhere, and for reduced motion, the switch stays instant.
+  if (!document.startViewTransition || matchMedia("(prefers-reduced-motion: reduce)").matches) swap();
+  else document.startViewTransition(swap);
 };
 
 /**
- * Switches the theme instantly on <html>. When `persist` is set (signed-in
- * users), the choice is also saved to the account.
+ * Switches the theme on <html>, crossfading between them. When `persist` is
+ * set (signed-in users), the choice is also saved to the account.
  */
 export function ThemePicker({ persist = false, compact = false }: { persist?: boolean; compact?: boolean }) {
   const current = useSyncExternalStore(subscribe, readTheme, () => null);
